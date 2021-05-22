@@ -1,6 +1,8 @@
 import App from './App';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
+import routes from "./routes";
+import cors from 'cors';
 
 const app = new App().application;
 const port = 3000;
@@ -24,8 +26,12 @@ const options: swaggerJSDoc.OAS3Options = {
 const swaggerSpec = swaggerJSDoc(options);
 
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api/', routes);
+app.use(cors())
 
 // server open
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log('Server listening on poart 3000!');
 });
+
+export default server;
