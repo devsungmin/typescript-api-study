@@ -1,14 +1,15 @@
 import express, { Response, Request } from 'express'
+import userRoutes from './user.route';
 
 const router = express.Router();
 
 /**
- * GET /api/test
- * @summary test
- * @tags test
+    server check
  */
 router.get('/test', (req: express.Request, res: express.Response) => {
     res.send('test');
 })
+
+router.use('./user', userRoutes)
 
 export default router
