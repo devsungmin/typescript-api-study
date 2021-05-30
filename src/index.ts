@@ -31,7 +31,7 @@ const options: swaggerJSDoc.OAS3Options = {
 const swaggerSpec = swaggerJSDoc(options);
 
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-app.use('/api/', routes);
+app.use('/api', routes);
 app.use(cors());
 sequelize.sync();
 
