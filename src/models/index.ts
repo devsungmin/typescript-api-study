@@ -7,6 +7,10 @@ export const sequelize = new Sequelize(
     config.development.password,
     {
         host: config.development.host,
-        dialect: 'mysql'
+        dialect: 'mysql',
+        define: {
+            timestamps: false
+        },
+        timezone: "+09:00",
     }
 )
