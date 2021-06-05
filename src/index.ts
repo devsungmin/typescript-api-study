@@ -3,6 +3,7 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
 import cors from 'cors';
 import dotenv from 'dotenv'
+import express from 'express'
 
 import routes from "./routes";
 import { sequelize } from './models'
@@ -11,6 +12,10 @@ dotenv.config();
 
 const app = new App().application;
 const port: number = parseInt(process.env.PORT as string, 10) || 3000;
+
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // swagger
 const options: swaggerJSDoc.OAS3Options = {
@@ -31,8 +36,8 @@ const options: swaggerJSDoc.OAS3Options = {
 const swaggerSpec = swaggerJSDoc(options);
 
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 app.use('/api', routes);
-app.use(cors());
 sequelize.sync();
 
 // server open

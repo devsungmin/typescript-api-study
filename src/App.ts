@@ -1,7 +1,7 @@
-import express from 'express';
+import express, { Request, Response, Application } from 'express';
 
 class App {
-    public application: express.Application;
+    public application: Application;
 
     constructor() {
         this.application = express();
@@ -9,7 +9,7 @@ class App {
     }
 
     private router(): void {
-        this.application.get('/api', (req: express.Request, res: express.Response) => {
+        this.application.get('/api', (req: Request, res: Response) => {
             res.send('hello typescript server!');
         })
     }
