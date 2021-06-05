@@ -1,13 +1,12 @@
 import Sequelize, { Model } from 'sequelize';
 import { sequelize } from './index';
+import userInterface from '../interface/user.interface'
 
-export class User extends Model { }
-
-export class userModel {
-  id: number
-  email: string
-  password: string
-  name: string
+export class User extends Model<userInterface>{
+  public id!: number;
+  public email!: string;
+  public password!: string;
+  public name!: string;
 }
 
 User.init(
