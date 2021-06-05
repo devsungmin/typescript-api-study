@@ -1,38 +1,33 @@
-import { Model, Optional, DataTypes } from 'sequelize';
+import Sequelize, { Model } from 'sequelize';
 import { sequelize } from './index';
-import userInterface from '../interface/user.interface'
 
-interface UserCreationAttributes extends Optional<userInterface, "id"> { }
+export class User extends Model { }
 
-class User extends Model<userInterface, UserCreationAttributes> implements userInterface {
-  public id!: number;
-  public email!: string;
-  public password!: string;
-  public name!: string;
-
-  // timestamps!
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
+export class userModel {
+  id: number
+  email: string
+  password: string
+  name: string
 }
 
 User.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: Sequelize.INTEGER,
       autoIncrement: true,
       primaryKey: true
     },
     email: {
-      type: DataTypes.STRING(128),
+      type: Sequelize.STRING(128),
       allowNull: false
     },
     password: {
-      type: DataTypes.STRING(128),
+      type: Sequelize.STRING(128),
       allowNull: true
     },
     name: {
-      type: DataTypes.STRING(128),
+      type: Sequelize.STRING(128),
       allowNull: false
     }
-  }, { sequelize }
+  }, { sequelize, modelName: "User", tableName: "userTable" }
 );
