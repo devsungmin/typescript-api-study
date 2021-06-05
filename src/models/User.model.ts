@@ -1,5 +1,4 @@
 import { Model, DataTypes, Association, BuildOptions, Sequelize } from 'sequelize';
-import { sequelize } from './index';
 import userInterface from '../interface/user.interface'
 
 export class User extends Model<userInterface>{
