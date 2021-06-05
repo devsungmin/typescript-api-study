@@ -1,4 +1,4 @@
-import Sequelize, { Model } from 'sequelize';
+import Sequelize, { Model, DataTypes, Association } from 'sequelize';
 import { sequelize } from './index';
 import userInterface from '../interface/user.interface'
 
@@ -7,25 +7,29 @@ export class User extends Model<userInterface>{
   public email!: string;
   public password!: string;
   public name!: string;
+
+  public static associations: {
+    userHasManyScores: Association<User>;
+  }
 }
 
 User.init(
   {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true
     },
     email: {
-      type: Sequelize.STRING(128),
+      type: DataTypes.STRING(128),
       allowNull: false
     },
     password: {
-      type: Sequelize.STRING(128),
+      type: DataTypes.STRING(128),
       allowNull: true
     },
     name: {
-      type: Sequelize.STRING(128),
+      type: DataTypes.STRING(128),
       allowNull: false
     }
   }, { sequelize, modelName: "User", tableName: "userTable" }
