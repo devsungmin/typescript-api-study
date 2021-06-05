@@ -1,4 +1,4 @@
-import Sequelize, { Model, DataTypes, Association } from 'sequelize';
+import { Model, DataTypes, Association, BuildOptions, Sequelize } from 'sequelize';
 import { sequelize } from './index';
 import userInterface from '../interface/user.interface'
 
@@ -12,9 +12,12 @@ export class User extends Model<userInterface>{
     userHasManyScores: Association<User>;
   }
 }
+export type UserStatic = typeof Model & {
+  new(values?: object, options?: BuildOptions): User;
+};
 
-User.init(
-  {
+export function UserFactor(sequelize: Sequelize): UserStatic {
+  return <UserStatic>sequelize.define("user", {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -32,5 +35,5 @@ User.init(
       type: DataTypes.STRING(128),
       allowNull: false
     }
-  }, { sequelize, modelName: "User", tableName: "userTable" }
-);
+  })
+}
