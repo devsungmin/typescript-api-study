@@ -10,7 +10,6 @@ export default class userController {
       // TODO: 중복 회원 체크 처리
 
       await this.model.create({
-        id: 1,
         email: email,
         password: password,
         name: name
