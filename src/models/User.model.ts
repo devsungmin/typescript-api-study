@@ -2,7 +2,6 @@ import { Model, DataTypes, Association, BuildOptions, Sequelize } from 'sequeliz
 import userInterface from '../interface/user.interface'
 
 export class User extends Model<userInterface>{
-  public id!: number;
   public email!: string;
   public password!: string;
   public name!: string;
@@ -17,11 +16,6 @@ export type UserStatic = typeof Model & {
 
 export function UserFactor(sequelize: Sequelize): UserStatic {
   return <UserStatic>sequelize.define("user", {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true
-    },
     email: {
       type: DataTypes.STRING(128),
       allowNull: false
