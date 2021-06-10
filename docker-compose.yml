@@ -10,7 +10,7 @@ services:
       - ./typescript_server:/app
       - /app/node_modules
     ports:
-      - 5000:3000
+      - 3000:3000
     depends_on:
       - db
     links:
@@ -24,7 +24,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: 1q2w3e4r1!
-      MYSQL_USER: devsungmin
+      MYSQL_USER: typescript_server_db
       MYSQL_PASSWORD: 1q2w3e4r1!
       MYSQL_DATABASE: typescript_api_study
     ports:
