@@ -5,6 +5,9 @@
 ```
 
 ### Started Example Project
+```
+docker을 사용하지 않고 실행 할 경우 아래 명령어를 사용해주세요!
+```
 1. Modify .enf-sample file
 2. `vim ./.env-sample`
 3. `mv ./.env-sample ./.env`
