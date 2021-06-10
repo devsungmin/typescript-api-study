@@ -8,7 +8,6 @@ export default class userController {
   public register = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
     const { email, password, name } = req.body
     try {
-      // TODO: 중복 회원 체크 처리
       const checkUser = await this.model.findOne({
         where: { "email": email }
       })
@@ -25,7 +24,7 @@ export default class userController {
         checkUser == null;
       }
       else {
-        res.status(302).json({ "message": "이미 있는 회원입니다." })
+        res.status(403).json({ "message": "이미 있는 회원입니다." })
       }
     } catch (error) {
       next(error)
@@ -38,7 +37,6 @@ export default class userController {
     next: NextFunction
   ): Promise<Response | void> => {
     try {
-      // TODO: 로그인 처리 구현
       const { email, password } = req.body
       const user = await this.model.findOne({
         where: { "email": email }
@@ -52,7 +50,7 @@ export default class userController {
           res.status(200).json({ 'message': 'login sucess', "token": token })
         }
       } else {
-        res.status(300).json({ 'messaage': 'login error' })
+        res.status(403).json({ 'messaage': 'login error' })
       }
     } catch (error) {
       next(error)
