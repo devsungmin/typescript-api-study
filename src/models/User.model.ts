@@ -18,7 +18,7 @@ export function UserFactor(sequelize: Sequelize): UserStatic {
   return <UserStatic>sequelize.define("user", {
     email: {
       type: DataTypes.STRING(128),
-      allowNull: false
+      allowNull: false,
     },
     password: {
       type: DataTypes.STRING(128),
@@ -26,7 +26,7 @@ export function UserFactor(sequelize: Sequelize): UserStatic {
     },
     name: {
       type: DataTypes.STRING(128),
-      allowNull: false
+      allowNull: true
     }
   })
 }
