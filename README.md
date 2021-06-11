@@ -6,7 +6,7 @@
 ```
 
 ### Started Example Project
-1. install docker or docker
+1. install docker or docker-compose
 2. `mv ./env-sample /typescript_server/.env`
 3. enter commend
    ```
