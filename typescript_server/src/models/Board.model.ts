@@ -5,6 +5,7 @@ export class Board extends Model<boardInterface> {
     public id?: number;
     public title!: string;
     public writer!: string;
+    public post!: string;
     public createDate!: Date;
     public updateDate!: Date;
 
@@ -30,6 +31,10 @@ export function BoardFactor(sequelize: Sequelize): BoardStatic {
         },
         writer: {
             type: DataTypes.STRING(128),
+            allowNull: false
+        },
+        post: {
+            type: DataTypes.STRING(1000),
             allowNull: false
         },
         createDate: {
