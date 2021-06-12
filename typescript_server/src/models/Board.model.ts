@@ -2,6 +2,7 @@ import { Model, DataTypes, Association, BuildOptions, Sequelize } from 'sequeliz
 import boardInterface from '../interface/board.interface';
 
 export class Board extends Model<boardInterface> {
+    public id?: number;
     public title!: string;
     public writer!: string;
     public createDate!: Date;
@@ -18,6 +19,11 @@ export type BoardStatic = typeof Model & {
 
 export function BoardFactor(sequelize: Sequelize): BoardStatic {
     return <BoardStatic>sequelize.define("board", {
+        id: {
+            type: DataTypes.BIGINT,
+            allowNull: false,
+            primaryKey: true
+        },
         title: {
             type: DataTypes.STRING(100),
             allowNull: false
