@@ -4,11 +4,11 @@ import { Board } from '../models'
 export default class boardController {
     public model = Board;
 
-    public createBoard = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
+    public createBoard = (req: Request, res: Response, next: NextFunction) => {
         try {
             const { title, writer, post } = req.body;
             const today = new Date()
-            await this.model.create({
+            this.model.create({
                 id: new Date().getTime(),
                 title: title,
                 writer: writer,
@@ -63,16 +63,16 @@ export default class boardController {
         }
     }
 
-    public delBoard = async (req: Request, res: Response, next: NextFunction) => {
+    public delBoard = (req: Request, res: Response, next: NextFunction) => {
         try {
             const { id } = req.params
-            const board = await this.model.findOne({
+            const board = this.model.findOne({
                 where: { "id": id }
             })
             if (board === null) {
                 res.status(400).json({ "message": "게시글이 없습니다." })
             } else {
-                await this.model.destroy({ where: { "id": id } })
+                this.model.destroy({ where: { "id": id } })
                 res.status(200).json({ "message": '글 삭제가 되었습니다.' })
             }
         } catch (error) {

@@ -5,19 +5,26 @@ import { User } from "../models";
 export default class userController {
   public model = User;
 
-  public register = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
+  public register = (req: Request, res: Response, next: NextFunction) => {
     const { email, password, name } = req.body
     try {
-      const checkUser = await this.model.findOne({
+      const checkUser = this.model.findOne({
         where: { "email": email }
       })
+      // const refreshToken = jwt.sign(, 'single', {
+      //   expiresIn: '1h'
+      // })
+
+      //TODO: refreshToken값 처리
       if (checkUser == null) {
-        const user = await this.model.create({
+        const user = this.model.create({
+          id: new Date().getTime(),
           email: email,
           password: password,
           name: name,
+          refreshToken: "123"
         })
-        const token = jwt.sign({ email: user.email, name: user.name }, 'single', {
+        const token = jwt.sign(user, 'single', {
           expiresIn: '14 days'
         });
         res.status(200).json({ "message": 'register sucess', "token": token })
@@ -31,23 +38,27 @@ export default class userController {
     }
   }
 
-  public login = async (
+  public login = (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<Response | void> => {
+  ) => {
     try {
       const { email, password } = req.body
-      const user = await this.model.findOne({
-        where: { "email": email }
+      const user = this.model.findOne({
+        where: { "email": email, "password": password }
       });
 
-      if (user?.email == email && user?.password == password) {
+      if (!user) {
         if (user != null) {
-          const token = jwt.sign({ email: user.email, name: user.name }, 'single', {
+          const AccessToken = jwt.sign(user, 'single', {
             expiresIn: '1h'
           });
-          res.status(200).json({ 'message': 'login sucess', "token": token })
+
+          const refreshToken = jwt.sign(user, 'single', {
+            expiresIn: '1h'
+          });
+          res.status(200).json({ 'message': 'login sucess', "token": AccessToken })
         }
       } else {
         res.status(403).json({ 'messaage': 'login error' })
