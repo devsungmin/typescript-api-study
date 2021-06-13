@@ -1,6 +1,7 @@
 import { Sequelize } from 'sequelize';
 import { config } from '../config/config';
-import { UserFactor } from './User.model'
+import { UserFactor } from './User.model';
+import { BoardFactor } from './Board.model';
 
 export const sequelize = new Sequelize(
     config.development.database,
@@ -17,3 +18,4 @@ export const sequelize = new Sequelize(
 )
 
 export const User = UserFactor(sequelize)
+export const Board = BoardFactor(sequelize)
