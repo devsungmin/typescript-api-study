@@ -31,19 +31,19 @@ export function ProductFactor(sequelize: Sequelize): ProductStatic {
             allowNull: false
         },
         price: {
-            type: DataTypes.NUMBER,
+            type: DataTypes.INTEGER,
             allowNull: false
         },
         category: {
             type: DataTypes.STRING(30),
             allowNull: false
         },
-        sellerId: {
+        sellersId: {
             type: DataTypes.BIGINT,
             allowNull: false,
         },
         salePrice: {
-            type: DataTypes.NUMBER,
+            type: DataTypes.INTEGER,
             allowNull: true
         }
     })

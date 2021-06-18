@@ -3,6 +3,7 @@ import { config } from '../config/config';
 import { UserFactor } from './User.model';
 import { BoardFactor } from './Board.model';
 import { SellerFactor } from './Seller.model';
+import { ProductFactor } from './Product.model';
 
 export const sequelize = new Sequelize(
     config.development.database,
@@ -21,3 +22,4 @@ export const sequelize = new Sequelize(
 export const User = UserFactor(sequelize)
 export const Board = BoardFactor(sequelize)
 export const Seller = SellerFactor(sequelize)
+export const Product = ProductFactor(sequelize)
