@@ -4,6 +4,7 @@ import { UserFactor } from './User.model';
 import { BoardFactor } from './Board.model';
 import { SellerFactor } from './Seller.model';
 import { ProductFactor } from './Product.model';
+import { ReviewFactor } from './Review.model';
 
 export const sequelize = new Sequelize(
     config.development.database,
@@ -23,3 +24,15 @@ export const User = UserFactor(sequelize)
 export const Board = BoardFactor(sequelize)
 export const Seller = SellerFactor(sequelize)
 export const Product = ProductFactor(sequelize)
+export const Review = ReviewFactor(sequelize)
+
+// Product.belongsTo(Seller, {
+//     foreignKey: "sellerId",
+//     as: "seller"
+// })
+
+Seller.hasMany(Product, {
+    sourceKey: 'id',
+    foreignKey: 'sellerId',
+    as: 'products'
+})

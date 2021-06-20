@@ -1,6 +1,5 @@
 import { Model, DataTypes, Association, BuildOptions, Sequelize } from 'sequelize';
 import productInterface from '../interface/product.interface';
-import { Seller } from './Seller.model';
 
 export class Product extends Model<productInterface> {
     public id?: number;
